@@ -10,6 +10,7 @@ import OpinionsCtrl from "./opinions.controller.js";
 const router = express.Router();
 
 router.route("/").get(CareersCtrl.apiGetCareers);
+router.route("/id/:id").get(CareersCtrl.apiGetCareerById);
 router.route("/opinions")
   .post(OpinionsCtrl.apiPostOpinion)
   .put(OpinionsCtrl.apiUpdateOpinion)

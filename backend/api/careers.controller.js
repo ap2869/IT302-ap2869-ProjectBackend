@@ -1,4 +1,3 @@
-
 // Name: Alex Paguay
 // Date: 02/19/2026
 // Course: IT302-452
@@ -34,5 +33,20 @@ export default class CareersController {
       total_results: totalNumCareers,
     };
     res.json(response);
+  }
+
+  static async apiGetCareerById(req, res, next) {
+    try {
+      let id = req.params.id;
+      let career = await CareersDAO.getCareerById(id);
+      if (!career) {
+        res.status(404).json({ error: "Not found" });
+        return;
+      }
+      res.json(career);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
   }
 }

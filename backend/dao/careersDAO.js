@@ -3,6 +3,8 @@
 // Course: IT302-452
 // Assignment: Phase 2 Read MongoDB data
 // Email: ap2869@njit.edu
+import { ObjectId } from "mongodb";
+
 let careers;
 
 export default class CareersDAO {
@@ -52,6 +54,15 @@ export default class CareersDAO {
                 `Unable to convert cursor to array or problem counting documents, ${e}`
             );
             return { careersList: [], totalNumCareers: 0 };
+        }
+    }
+
+    static async getCareerById(id) {
+        try {
+            return await careers.findOne({ _id: new ObjectId(id) });
+        } catch (e) {
+            console.error(`Unable to get career by id: ${e}`);
+            return null;
         }
     }
 }
