@@ -62,4 +62,14 @@ export default class OpinionsDAO {
       return { error: e };
     }
   }
+
+  static async getOpinionsByCareerId(careerId) {
+    try {
+      const cursor = await opinions.find({ careerId: careerId });
+      return await cursor.toArray();
+    } catch (e) {
+      console.error(`Unable to get opinions: ${e}`);
+      return [];
+    }
+  }
 }

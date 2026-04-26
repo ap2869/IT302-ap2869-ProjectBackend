@@ -4,6 +4,8 @@
 // Assignment: Phase 2 Read MongoDB data
 // Email: ap2869@njit.edu
 import CareersDAO from "../dao/careersDAO.js";
+import OpinionsDAO from "../dao/opinionsDAO.js";
+
 
 export default class CareersController {
   static async apiGetCareers(req, res, next) {
@@ -43,6 +45,8 @@ export default class CareersController {
         res.status(404).json({ error: "Not found" });
         return;
       }
+      let opinions = await OpinionsDAO.getOpinionsByCareerId(id);
+      career.opinions = opinions;
       res.json(career);
     } catch (e) {
       console.log(`api, ${e}`);
